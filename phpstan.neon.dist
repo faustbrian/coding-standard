@@ -1,0 +1,27 @@
+parameters:
+    level: max
+    paths:
+        - src
+
+    scanFiles:
+        - vendor/squizlabs/php_codesniffer/src/Sniffs/Sniff.php
+        - vendor/squizlabs/php_codesniffer/src/Standards/Squiz/Sniffs/Commenting/FunctionCommentSniff.php
+
+    ignoreErrors:
+        # ECS skip() accepts sniff error codes (e.g., FunctionCommentSniff.Missing) which PHPStan doesn't recognize
+        - message: '#Parameter \#1 \$skips of method Symplify\\EasyCodingStandard\\Config\\ECSConfig::skip\(\)#'
+          path: src/EasyCodingStandard/Factory.php
+          identifier: argument.type
+        # FunctionCommentSniff::class is a valid class-string<Sniff> but PHPStan can't verify without full PHPCS autoloading
+        - message: '#Parameter \#1 \$checkerClass of method Symplify\\EasyCodingStandard\\Config\\ECSConfig::rule\(\) expects class-string#'
+          path: src/EasyCodingStandard/Factory.php
+          identifier: argument.type
+
+    reportUnmatchedIgnoredErrors: false
+
+    parallel:
+        maximumNumberOfProcesses: 1
+        processTimeout: 300.0
+
+    phpVersion: 80500
+
