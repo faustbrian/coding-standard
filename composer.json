@@ -1,0 +1,70 @@
+{
+    "name": "cline/coding-standard",
+    "description": "Centralized coding standards for Cline projects using PHP-CS-Fixer, ECS, and Rector",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Brian Faust",
+            "email": "brian@cline.sh"
+        }
+    ],
+    "require": {
+        "php": "^8.5.0",
+        "driftingly/rector-laravel": "^2.1.6",
+        "ergebnis/composer-normalize": "^2.48.2",
+        "erickskrauch/php-cs-fixer-custom-fixers": "^1.3.1",
+        "friendsofphp/php-cs-fixer": "^3.91.2",
+        "kubawerlos/php-cs-fixer-custom-fixers": "^3.35.1",
+        "larastan/larastan": "^3.8",
+        "pestphp/pest": "^4.1.6",
+        "pestphp/pest-plugin-drift": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "pestphp/pest-plugin-type-coverage": "^4.0.3",
+        "phpstan/phpstan": "^2.1.32",
+        "rector/rector": "^2.2.11",
+        "slevomat/coding-standard": ">=8.25.1",
+        "spatie/laravel-data": "^4.18",
+        "squizlabs/php_codesniffer": "^4.0.1",
+        "symplify/coding-standard": "^13.0",
+        "symplify/easy-coding-standard": "^13.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.26.0",
+        "orchestra/testbench": "^10.8",
+        "symfony/var-dumper": "^7.4.0"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Cline\\CodingStandard\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true,
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "lint": "vendor/bin/ecs check --fix",
+        "refactor": "rector",
+        "test": [
+            "@test:lint",
+            "@test:type-coverage",
+            "@test:unit",
+            "@test:refactor"
+        ],
+        "test:lint": "vendor/bin/ecs check",
+        "test:refactor": "rector --dry-run",
+        "test:type-coverage": "pest --parallel",
+        "test:types": "phpstan",
+        "test:unit": "pest --parallel"
+    }
+}
