@@ -1,8 +1,3 @@
----
-title: Custom Fixers
-description: Custom PHP-CS-Fixer fixers that enforce architectural patterns and naming conventions beyond standard PHP-CS-Fixer rules.
----
-
 ## Naming Convention Fixers
 
 ### AbstractNameFixer

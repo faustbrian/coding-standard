@@ -1,8 +1,3 @@
----
-title: Basic Usage
-description: Get started with the coding standard package for modern PHP projects.
----
-
 ## Installation
 
 ```bash

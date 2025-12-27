@@ -1,8 +1,3 @@
----
-title: Presets
-description: Opinionated presets that combine related rules for different aspects of PHP code formatting and standards.
----
-
 ## Standard Preset
 
 The comprehensive preset for PHP 8.4+ projects. Includes all other presets plus extensive formatting and code quality rules.
