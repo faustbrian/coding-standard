@@ -165,4 +165,4 @@ This package registers several custom fixers automatically:
 - Architecture fixers (namespace, author tags, version tags)
 - Code quality fixers (duplicate docblocks, readonly classes, variable case)
 
-See [Custom Fixers](/coding-standard/custom-fixers/) for detailed documentation.
+See [Custom Fixers](./custom-fixers.md) for detailed documentation.
