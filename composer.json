@@ -15,7 +15,7 @@
         "erickskrauch/php-cs-fixer-custom-fixers": "^1.3.1",
         "friendsofphp/php-cs-fixer": "^3.91.2",
         "kubawerlos/php-cs-fixer-custom-fixers": "^3.35.1",
-        "larastan/larastan": "^3.8",
+        "larastan/larastan": "^2.0|^3.0",
         "pestphp/pest": "^3.0|^4.0",
         "pestphp/pest-plugin-laravel": "^3.0|^4.0",
         "pestphp/pest-plugin-type-coverage": "^3.0|^4.0",
