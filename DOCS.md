@@ -1,8 +1,8 @@
 ## Table of Contents
 
-1. [Basic Usage](#doc-docs-basic-usage) (`docs/basic-usage.md`)
-2. [Custom Fixers](#doc-docs-custom-fixers) (`docs/custom-fixers.md`)
-3. [Presets](#doc-docs-presets) (`docs/presets.md`)
+1. [Basic Usage](#doc-docs-basic-usage)
+2. [Custom Fixers](#doc-docs-custom-fixers)
+3. [Presets](#doc-docs-presets)
 <a id="doc-docs-basic-usage"></a>
 
 ## Installation
