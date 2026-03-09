@@ -19,9 +19,9 @@ composer require cline/coding-standard --dev
 
 ## Documentation
 
-- **[Basic Usage](cookbook/basic-usage.md)** - Getting started with configuration and running fixers
-- **[Custom Fixers](cookbook/custom-fixers.md)** - Architecture and naming convention fixers
-- **[Presets](cookbook/presets.md)** - Standard, PHPDoc, PHPUnit, and Ordered rule presets
+- **[Basic Usage](DOCS.md#doc-docs-basic-usage)** - Getting started with configuration and running fixers
+- **[Custom Fixers](DOCS.md#doc-docs-custom-fixers)** - Architecture and naming convention fixers
+- **[Presets](DOCS.md#doc-docs-presets)** - Standard, PHPDoc, PHPUnit, and Ordered rule presets
 
 ## Change log
 

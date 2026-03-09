@@ -1,8 +1,10 @@
 ## Table of Contents
 
-1. Basic Usage (`docs/basic-usage.md`)
-2. Custom Fixers (`docs/custom-fixers.md`)
-3. Presets (`docs/presets.md`)
+1. [Basic Usage](#doc-docs-basic-usage) (`docs/basic-usage.md`)
+2. [Custom Fixers](#doc-docs-custom-fixers) (`docs/custom-fixers.md`)
+3. [Presets](#doc-docs-presets) (`docs/presets.md`)
+<a id="doc-docs-basic-usage"></a>
+
 ## Installation
 
 ```bash
@@ -165,7 +167,9 @@ This package registers several custom fixers automatically:
 - Architecture fixers (namespace, author tags, version tags)
 - Code quality fixers (duplicate docblocks, readonly classes, variable case)
 
-See [Custom Fixers](./custom-fixers.md) for detailed documentation.
+See [Custom Fixers](#doc-docs-custom-fixers) for detailed documentation.
+
+<a id="doc-docs-custom-fixers"></a>
 
 ## Naming Convention Fixers
 
@@ -497,6 +501,8 @@ return ConfigurationFactory::createFromPreset(
     ]
 );
 ```
+
+<a id="doc-docs-presets"></a>
 
 ## Standard Preset
 
