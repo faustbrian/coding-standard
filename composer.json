@@ -22,7 +22,7 @@
         "phpstan/phpstan": "^2.1.40",
         "rector/rector": "^2.3.8",
         "slevomat/coding-standard": ">=8.28.0",
-        "spatie/laravel-data": "^3.0 || ^4.20",
+        "cline/struct": "^2.0",
         "squizlabs/php_codesniffer": "^4.0.1",
         "symplify/coding-standard": "^13.0",
         "symplify/easy-coding-standard": "^13.0.4"
