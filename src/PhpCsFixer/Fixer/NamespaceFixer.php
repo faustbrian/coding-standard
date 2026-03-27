@@ -40,7 +40,6 @@ use function throw_if;
 use function throw_unless;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 final class NamespaceFixer extends AbstractFixer

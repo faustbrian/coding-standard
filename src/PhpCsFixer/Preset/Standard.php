@@ -29,7 +29,6 @@ use PhpCsFixerCustomFixers\Fixer\StringableInterfaceFixer;
 use PhpCsFixerCustomFixers\Fixer\TypedClassConstantFixer;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.2
  * @psalm-immutable
  */
@@ -460,7 +459,7 @@ final readonly class Standard implements PresetInterface
             // 'Architecture/exception_name_fixer' => true,
             // 'Architecture/interface_name_fixer' => true,
             // 'Architecture/trait_name_fixer' => true,
-            'Architecture/author_tag_fixer' => true,
+            'Architecture/remove_author_tag_fixer' => true,
             'Architecture/import_fqcn_in_new_fixer' => true,
             'Architecture/import_fqcn_in_attribute_fixer' => true,
             'Architecture/import_fqcn_in_static_call_fixer' => true,

@@ -14,7 +14,6 @@ namespace Cline\CodingStandard\PhpCsFixer;
  *
  * Supports both open-source (MIT/GPL style) and proprietary headers.
  *
- * @author Brian Faust <brian@cline.sh>
  * @psalm-immutable
  */
 final readonly class CopyrightHeader

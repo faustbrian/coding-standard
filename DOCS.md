@@ -415,6 +415,30 @@ Enforces consistent `@author` tag format in PHPDoc blocks.
 
 **Rule Key:** `Architecture/author_tag_fixer`
 
+### RemoveAuthorTagFixer
+
+Removes all `@author` tags from PHPDoc blocks and drops empty docblocks
+left behind by that removal.
+
+```php
+// ❌ Before
+/**
+ * Example summary.
+ *
+ * @author Brian Faust <brian@cline.sh>
+ * @version 1.0.0
+ */
+
+// ✅ After
+/**
+ * Example summary.
+ *
+ * @version 1.0.0
+ */
+```
+
+**Rule Key:** `Architecture/remove_author_tag_fixer`
+
 ### VersionTagFixer
 
 Enforces consistent `@version` tag format in PHPDoc blocks.
@@ -483,6 +507,7 @@ Some fixers are disabled by default in the Standard preset:
 ```php
 // Commented out in Standard preset (disabled by default):
 // 'Architecture/abstract_name_fixer' => true,
+// 'Architecture/author_tag_fixer' => true,
 // 'Architecture/exception_name_fixer' => true,
 // 'Architecture/interface_name_fixer' => true,
 // 'Architecture/trait_name_fixer' => true,

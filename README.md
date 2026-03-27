@@ -9,6 +9,8 @@ Opinionated PHP-CS-Fixer configuration with custom fixers and presets for modern
 
 PHPDoc presets also include an 80-column docblock prose wrapper so long
 descriptions stay readable without relying on manual formatting.
+The Standard preset removes `@author` tags by default while still
+allowing explicit opt-in to the legacy author-tag fixer.
 
 ## Requirements
 

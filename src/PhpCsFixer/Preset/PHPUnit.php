@@ -15,7 +15,6 @@ use PhpCsFixerCustomFixers\Fixer\PhpUnitDedicatedAssertFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpUnitNoUselessReturnFixer;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 final class PHPUnit implements PresetInterface

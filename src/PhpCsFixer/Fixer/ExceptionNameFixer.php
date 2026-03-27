@@ -24,7 +24,6 @@ use const T_STRING;
 use function str_ends_with;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 final class ExceptionNameFixer extends AbstractFixer

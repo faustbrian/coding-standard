@@ -32,7 +32,6 @@ use function preg_split;
 use function wordwrap;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 final class PhpdocLineLengthFixer extends AbstractFixer

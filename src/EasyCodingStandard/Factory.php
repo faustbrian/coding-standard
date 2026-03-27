@@ -21,6 +21,7 @@ use Cline\CodingStandard\PhpCsFixer\Fixer\NewArgumentNewlineFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\PhpdocLineLengthFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\PsalmImmutableOnReadonlyClassFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\RedundantReadonlyPropertyFixer;
+use Cline\CodingStandard\PhpCsFixer\Fixer\RemoveAuthorTagFixer;
 use Cline\CodingStandard\PhpCsFixer\Preset\PresetInterface;
 use Cline\CodingStandard\PhpCsFixer\Preset\Standard;
 use Closure;
@@ -43,10 +44,8 @@ use function is_array;
 /**
  * Factory for creating EasyCodingStandard configurations.
  *
- * Provides a streamlined way to create ECS configurations using
- * the centralized PHP-CS-Fixer presets and custom fixers.
- *
- * @author Brian Faust <brian@cline.sh>
+ * Provides a streamlined way to create ECS configurations using the centralized
+ * PHP-CS-Fixer presets and custom fixers.
  */
 final class Factory
 {
@@ -144,6 +143,7 @@ final class Factory
             new PhpdocLineLengthFixer(),
             new PsalmImmutableOnReadonlyClassFixer(),
             new RedundantReadonlyPropertyFixer(),
+            new RemoveAuthorTagFixer(),
         ];
     }
 }

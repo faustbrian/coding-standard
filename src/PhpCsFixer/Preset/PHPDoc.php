@@ -19,7 +19,6 @@ use PhpCsFixerCustomFixers\Fixer\PhpdocTypesTrimFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpUnitRequiresConstraintFixer;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 final class PHPDoc implements PresetInterface

@@ -24,6 +24,7 @@ use Cline\CodingStandard\PhpCsFixer\Fixer\NewArgumentNewlineFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\PhpdocLineLengthFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\PsalmImmutableOnReadonlyClassFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\RedundantReadonlyPropertyFixer;
+use Cline\CodingStandard\PhpCsFixer\Fixer\RemoveAuthorTagFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\TraitNameFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\VariableCaseFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\VersionTagFixer;
@@ -40,7 +41,6 @@ use function array_merge;
 use function sprintf;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.2
  */
 final class ConfigurationFactory
@@ -115,6 +115,7 @@ final class ConfigurationFactory
                 new NamespaceFixer(),
                 new PhpdocLineLengthFixer(),
                 new RedundantReadonlyPropertyFixer(),
+                new RemoveAuthorTagFixer(),
                 new TraitNameFixer(),
                 new VariableCaseFixer(),
                 new VersionTagFixer(),

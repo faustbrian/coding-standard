@@ -17,10 +17,8 @@ use RectorLaravel\Set\LaravelSetProvider;
 /**
  * Factory for creating Rector configurations.
  *
- * Provides a streamlined way to create Rector configurations with
- * sensible defaults for Laravel projects using PHP 8.5.
- *
- * @author Brian Faust <brian@cline.sh>
+ * Provides a streamlined way to create Rector configurations with sensible
+ * defaults for Laravel projects using PHP 8.5.
  */
 final class Factory
 {

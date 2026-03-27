@@ -47,7 +47,6 @@ use function mb_strtolower;
  * would create a name collision with an already imported different class of the
  * same short name.
  *
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 final class ImportFqcnInNewFixer extends AbstractFixer

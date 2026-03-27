@@ -31,7 +31,6 @@ use function str_contains;
 use function str_replace;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 final class PsalmImmutableOnReadonlyClassFixer extends AbstractFixer

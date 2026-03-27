@@ -30,7 +30,6 @@ use const T_READONLY;
 use const T_WHITESPACE;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 final class RedundantReadonlyPropertyFixer extends AbstractFixer

@@ -28,18 +28,15 @@ use function mb_substr;
 use function str_contains;
 
 /**
- * Ensure method/function calls to `dispatch(` place a `new` expression
- * argument on the next line for readability:
+ * Ensure method/function calls to `dispatch(` place a `new` expression argument
+ * on the next line for readability:
  *
- *     $bus->dispatch(new Foo(...));
- * becomes
- *     $bus->dispatch(\n new Foo(... )\n);
+ * $bus->dispatch(new Foo(...)); becomes $bus->dispatch(\n new Foo(... )\n);
  *
- * This fixer only acts when the first argument is a `new` expression and
- * there are no non-whitespace tokens between the parenthesis and `new`.
- * Existing correct formatting (already multiline) is left unchanged.
+ * This fixer only acts when the first argument is a `new` expression and there
+ * are no non-whitespace tokens between the parenthesis and `new`. Existing
+ * correct formatting (already multiline) is left unchanged.
  *
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 final class NewArgumentNewlineFixer extends AbstractFixer

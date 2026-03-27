@@ -41,7 +41,6 @@ use function mb_strtolower;
  * Import FQCNs used in property (and parameter/promoted property) type
  * declarations.
  *
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.1
  */
 final class ImportFqcnInPropertyFixer extends AbstractFixer

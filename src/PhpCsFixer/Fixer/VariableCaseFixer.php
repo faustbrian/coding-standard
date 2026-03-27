@@ -27,7 +27,6 @@ use const T_STRING_VARNAME;
 use const T_VARIABLE;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  *
  * @implements ConfigurableFixerInterface<array{case: string}, array{case: string}>

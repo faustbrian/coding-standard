@@ -43,7 +43,6 @@ use function mb_strtolower;
  * Import FQCNs used in static calls: \Vendor\Pkg\Cls::method() -> Cls::method()
  * + use Vendor\Pkg\Cls;
  *
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.1
  */
 final class ImportFqcnInStaticCallFixer extends AbstractFixer

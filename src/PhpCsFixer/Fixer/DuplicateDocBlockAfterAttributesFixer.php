@@ -29,7 +29,6 @@ use function array_reverse;
 use function array_unique;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 final class DuplicateDocBlockAfterAttributesFixer extends AbstractFixer

@@ -10,7 +10,6 @@
 namespace Cline\CodingStandard\PhpCsFixer\Preset;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 interface PresetInterface

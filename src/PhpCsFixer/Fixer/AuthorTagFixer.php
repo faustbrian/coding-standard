@@ -41,7 +41,6 @@ use function str_replace;
 use function throw_if;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 final class AuthorTagFixer extends AbstractFixer

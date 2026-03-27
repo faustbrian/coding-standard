@@ -47,7 +47,6 @@ use function array_merge;
 use function count;
 
 /**
- * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
  */
 final class FinalReadonlyClassFixer extends AbstractFixer
