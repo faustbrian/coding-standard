@@ -21,6 +21,7 @@ use SplFileInfo;
 use const T_DOC_COMMENT;
 
 use function array_map;
+use function array_push;
 use function explode;
 use function implode;
 use function in_array;
@@ -98,6 +99,15 @@ PHP,
         }
     }
 
+    private function extractLineText(string $line): string
+    {
+        if (!preg_match('/^\s*\*\s?(.*)$/', $line, $matches)) {
+            return mb_trim($line);
+        }
+
+        return mb_trim($matches[1]);
+    }
+
     private function wrapDocComment(string $content): string
     {
         $lines = preg_split('/\R/u', $content);
@@ -106,47 +116,76 @@ PHP,
             return $content;
         }
 
-        foreach ($lines as $index => $line) {
-            $lines[$index] = $this->wrapLine($line);
+        $wrappedLines = [];
+        $paragraphLines = [];
+
+        foreach ($lines as $line) {
+            if ($this->isWrapCandidateLine($line)) {
+                $paragraphLines[] = $line;
+
+                continue;
+            }
+
+            if ($paragraphLines !== []) {
+                array_push($wrappedLines, ...$this->wrapParagraph($paragraphLines));
+                $paragraphLines = [];
+            }
+
+            $wrappedLines[] = $line;
         }
 
-        return implode("\n", $lines);
+        if ($paragraphLines !== []) {
+            array_push($wrappedLines, ...$this->wrapParagraph($paragraphLines));
+        }
+
+        return implode("\n", $wrappedLines);
     }
 
-    private function wrapLine(string $line): string
+    /**
+     * @param list<string> $paragraphLines
+     *
+     * @return list<string>
+     */
+    private function wrapParagraph(array $paragraphLines): array
     {
-        if ($this->shouldSkipLine($line)) {
-            return $line;
-        }
+        $firstLine = $paragraphLines[0];
 
-        if (!preg_match('/^(\s*\*\s?)(.*)$/', $line, $matches)) {
-            return $line;
+        if (!preg_match('/^(\s*\*\s?)(.*)$/', $firstLine, $matches)) {
+            return $paragraphLines;
         }
 
         $prefix = $matches[1];
-        $text = mb_trim($matches[2]);
         $availableWidth = self::MAX_LINE_LENGTH - mb_strlen($prefix);
 
-        if ($availableWidth < 1 || mb_strlen($line) <= self::MAX_LINE_LENGTH) {
-            return $line;
+        if ($availableWidth < 1) {
+            return $paragraphLines;
         }
 
-        $wrapped = wordwrap($text, $availableWidth, "\n", true);
+        $text = implode(' ', array_map(
+            $this->extractLineText(...),
+            $paragraphLines,
+        ));
 
-        return implode("\n", array_map(
+        if (mb_strlen($prefix.$text) <= self::MAX_LINE_LENGTH) {
+            return $paragraphLines;
+        }
+
+        $wrapped = wordwrap($text, $availableWidth, "\n", false);
+
+        return array_map(
             static fn (string $wrappedLine): string => $prefix.$wrappedLine,
             explode("\n", $wrapped),
-        ));
+        );
     }
 
-    private function shouldSkipLine(string $line): bool
+    private function isWrapCandidateLine(string $line): bool
     {
         $trimmedLine = mb_trim($line);
 
         if (in_array($trimmedLine, ['', '/**', '*/'], true)) {
-            return true;
+            return false;
         }
 
-        return preg_match('/^\s*\*\s*@/', $line) === 1;
+        return preg_match('/^\s*\*\s*(?!@).+$/', $line) === 1;
     }
 }

@@ -30,6 +30,7 @@ PHP;
     $result = $tokens->generateCode();
 
     expect($result)->not->toBe($code);
+    expect($result)->not->toContain("* would");
     expect($result)->toContain('* @param mixed $input Request data for the deletion workflow');
 
     foreach (explode("\n", $result) as $line) {
