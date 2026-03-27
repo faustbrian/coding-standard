@@ -38,16 +38,14 @@ use function mb_strtolower;
 
 /**
  * Ensures fully-qualified class names used in `new` expressions are imported
- * via `use`
- * and the short class name is used at the call site.
+ * via `use`, and the short class name is used at the call site.
  *
  * Example: `new \Vendor\Package\Foo()` becomes `new Foo()` with `use
  * Vendor\Package\Foo;` added.
  *
  * This fixer focuses on `new` expressions and avoids changes when doing so
- * would
- * create a name collision with an already imported different class of the same
- * short name.
+ * would create a name collision with an already imported different class of the
+ * same short name.
  *
  * @author Brian Faust <brian@cline.sh>
  * @version 1.0.0
