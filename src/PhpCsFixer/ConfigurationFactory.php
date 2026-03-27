@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Copyright (C) Brian Faust
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Cline\CodingStandard\PhpCsFixer;
 
 use Cline\CodingStandard\PhpCsFixer\Fixer\AbstractNameFixer;
@@ -25,6 +18,7 @@ use Cline\CodingStandard\PhpCsFixer\Fixer\PhpdocLineLengthFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\PsalmImmutableOnReadonlyClassFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\RedundantReadonlyPropertyFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\RemoveAuthorTagFixer;
+use Cline\CodingStandard\PhpCsFixer\Fixer\RemoveHeaderCommentFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\RemoveVersionTagFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\TraitNameFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\VariableCaseFixer;
@@ -114,6 +108,7 @@ final class ConfigurationFactory
                 new PhpdocLineLengthFixer(),
                 new RedundantReadonlyPropertyFixer(),
                 new RemoveAuthorTagFixer(),
+                new RemoveHeaderCommentFixer(),
                 new RemoveVersionTagFixer(),
                 new TraitNameFixer(),
                 new VariableCaseFixer(),

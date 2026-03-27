@@ -481,6 +481,32 @@ left behind by that removal.
 
 **Rule Key:** `Architecture/remove_version_tag_fixer`
 
+### RemoveHeaderCommentFixer
+
+Removes the file-level header comment that appears after the opening tag
+or strict-types declaration.
+
+```php
+// ❌ Before
+<?php declare(strict_types=1);
+
+/**
+ * Copyright (C) Brian Faust
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace App;
+
+// ✅ After
+<?php declare(strict_types=1);
+
+namespace App;
+```
+
+**Rule Key:** `Architecture/remove_header_comment_fixer`
+
 ### NamespaceFixer
 
 Enforces consistent namespace declarations.
@@ -536,6 +562,12 @@ Some fixers are disabled by default in the Standard preset:
 // 'Architecture/interface_name_fixer' => true,
 // 'Architecture/trait_name_fixer' => true,
 // 'Architecture/version_tag_fixer' => true,
+// 'header_comment' => [
+//     'comment_type' => 'PHPDoc',
+//     'header' => (new CopyrightHeader('Brian Faust'))->render(),
+//     'location' => 'after_declare_strict',
+//     'separate' => 'both',
+// ],
 // 'Architecture/final_readonly_class_fixer' => true,
 ```
 
@@ -600,15 +632,16 @@ The Standard preset combines:
   - `import_functions: true`
 
 #### Header Comment
-Automatically adds copyright header:
+The Standard preset removes the file header by default. To opt back into
+automatic header insertion, enable `header_comment` explicitly:
 
 ```php
-/**
- * Copyright (C) Brian Faust
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+'header_comment' => [
+    'comment_type' => 'PHPDoc',
+    'header' => (new CopyrightHeader('Brian Faust'))->render(),
+    'location' => 'after_declare_strict',
+    'separate' => 'both',
+],
 ```
 
 ### Notable Disabled Rules

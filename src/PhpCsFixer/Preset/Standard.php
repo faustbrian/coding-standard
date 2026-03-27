@@ -1,15 +1,7 @@
 <?php declare(strict_types=1);
 
-/**
- * Copyright (C) Brian Faust
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Cline\CodingStandard\PhpCsFixer\Preset;
 
-use Cline\CodingStandard\PhpCsFixer\CopyrightHeader;
 use Override;
 use PhpCsFixerCustomFixers\Fixer\DeclareAfterOpeningTagFixer;
 use PhpCsFixerCustomFixers\Fixer\EmptyFunctionBodyFixer;
@@ -33,12 +25,6 @@ use PhpCsFixerCustomFixers\Fixer\TypedClassConstantFixer;
  */
 final readonly class Standard implements PresetInterface
 {
-    public function __construct(
-        private CopyrightHeader $copyrightHeader = new CopyrightHeader(
-            'Brian Faust',
-        ),
-    ) {}
-
     #[Override()]
     public function name(): string
     {
@@ -203,12 +189,7 @@ final readonly class Standard implements PresetInterface
                 'import_functions' => true,
             ],
             'group_import' => false,
-            'header_comment' => [
-                'comment_type' => 'PHPDoc',
-                'header' => $this->copyrightHeader->render(),
-                'location' => 'after_declare_strict',
-                'separate' => 'both',
-            ],
+            'header_comment' => false,
             'heredoc_indentation' => false,
             'heredoc_to_nowdoc' => true,
             'implode_call' => true,
@@ -464,6 +445,7 @@ final readonly class Standard implements PresetInterface
             'Architecture/import_fqcn_in_static_call_fixer' => true,
             'Architecture/import_fqcn_in_property_fixer' => true,
             'Architecture/new_argument_newline_fixer' => true,
+            'Architecture/remove_header_comment_fixer' => true,
             'Architecture/remove_version_tag_fixer' => true,
             'Architecture/namespace_fixer' => true,
             'Architecture/duplicate_docblock_after_attributes_fixer' => true,
