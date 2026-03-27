@@ -58,3 +58,42 @@ PHP;
         expect(strlen($line))->toBeLessThanOrEqual(80);
     }
 });
+
+it('does not reflow long annotation type declarations', function (): void {
+    $code = <<<'PHP'
+<?php
+/**
+ * Map the stored outcome back into the lifecycle result DTO.
+ *
+ * @param array{
+ *     option_relationship_set_id: string,
+ *     code: string,
+ *     version: int,
+ *     state: string
+ * } $outcome
+ *
+ * @return array{
+ *     option_relationship_set_id: string,
+ *     code: string,
+ *     version: int,
+ *     state: string
+ * }
+ */
+final class Example
+{
+}
+PHP;
+
+    $fixer = new PhpdocLineLengthFixer();
+
+    $tokens = Tokens::fromCode($code);
+    $fixer->fix(new SplFileInfo(__FILE__), $tokens);
+
+    $result = $tokens->generateCode();
+
+    expect($result)->toBe($code);
+    expect($result)->toContain(' * @param array{');
+    expect($result)->toContain(' *     option_relationship_set_id: string,');
+    expect($result)->toContain(' * @return array{');
+    expect($result)->not->toContain(' * option_relationship_set_id: string, code: string, version: int, state:');
+});

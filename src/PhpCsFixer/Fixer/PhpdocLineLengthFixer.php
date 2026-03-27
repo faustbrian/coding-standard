@@ -171,6 +171,10 @@ PHP,
             return false;
         }
 
+        if (preg_match('/^\s*\*\s{2,}\S/', $line) === 1) {
+            return false;
+        }
+
         if (!preg_match('/^\s*\*\s?(.*)$/', $line, $matches)) {
             return false;
         }
