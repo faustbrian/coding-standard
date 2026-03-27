@@ -166,10 +166,6 @@ PHP,
             $paragraphLines,
         ));
 
-        if (mb_strlen($prefix.$text) <= self::MAX_LINE_LENGTH) {
-            return $paragraphLines;
-        }
-
         $wrapped = wordwrap($text, $availableWidth, "\n", false);
 
         return array_map(
@@ -186,6 +182,12 @@ PHP,
             return false;
         }
 
-        return preg_match('/^\s*\*\s*(?!@).+$/', $line) === 1;
+        if (!preg_match('/^\s*\*\s?(.*)$/', $line, $matches)) {
+            return false;
+        }
+
+        $text = mb_trim($matches[1]);
+
+        return $text !== '' && $text[0] !== '@';
     }
 }

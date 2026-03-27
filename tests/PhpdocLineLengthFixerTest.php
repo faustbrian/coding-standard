@@ -11,7 +11,15 @@ it('wraps long phpdoc prose lines', function (): void {
 /**
  * Execute the deletion workflow for the pricing route distance row.
  *
- * Validates the request payload, resolves the target aggregate, applies idempotency and lifecycle-state rules, and returns a lifecycle result that distinguishes success, replay, and failure outcomes.
+ * Validates the request payload, resolves the target aggregate, applies
+ * idempotency and lifecycle-state rules, and returns a lifecycle result that
+ * distinguishes success, replay, and failure outcomes.
+ *
+ * This fixer focuses on `new` expressions and avoids changes
+ * when doing so.
+ *
+ * @author Brian Faust <brian@cline.sh>
+ * @version 1.0.0
  *
  * @param mixed $input Request data for the deletion workflow
  *
@@ -30,7 +38,10 @@ PHP;
     $result = $tokens->generateCode();
 
     expect($result)->not->toBe($code);
-    expect($result)->not->toContain("* would");
+    expect($result)->not->toContain(" * This fixer focuses on `new` expressions and avoids changes\n * when doing so.");
+    expect($result)->toContain(' * This fixer focuses on `new` expressions and avoids changes when doing so.');
+    expect($result)->toContain(' * @author Brian Faust <brian@cline.sh>');
+    expect($result)->toContain(' * @version 1.0.0');
     expect($result)->toContain('* @param mixed $input Request data for the deletion workflow');
 
     foreach (explode("\n", $result) as $line) {
