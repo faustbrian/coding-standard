@@ -195,6 +195,7 @@ final class PHPDoc implements PresetInterface
             // ],
             PhpdocTypesTrimFixer::name() => true,
             // \PhpCsFixerCustomFixers\Fixer\PhpdocVarAnnotationToAssertFixer::name() => true,
+            'Architecture/phpdoc_line_length_fixer' => true,
         ];
     }
 

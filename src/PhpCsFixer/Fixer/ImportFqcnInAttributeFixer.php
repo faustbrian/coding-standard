@@ -37,7 +37,8 @@ use function implode;
 use function mb_strtolower;
 
 /**
- * Import FQCNs used in attributes: #[\Vendor\Attr] -> #[Attr] + use Vendor\Attr;
+ * Import FQCNs used in attributes: #[\Vendor\Attr] -> #[Attr] + use
+ * Vendor\Attr;
  *
  * @author Brian Faust <brian@cline.sh>
  * @version 1.0.1

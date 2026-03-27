@@ -679,6 +679,11 @@ Includes additional fixers from `kubawerlos/php-cs-fixer-custom-fixers`:
 - `PhpdocTypesCommaSpacesFixer` - Formats comma spacing in union types
 - `PhpdocTypesTrimFixer` - Trims extra whitespace from types
 
+The PHPDoc preset also includes `Architecture/phpdoc_line_length_fixer`,
+which wraps long prose lines in docblocks to 80 columns. Annotation lines
+(`@param`, `@return`, and similar tags) are left to the existing PHPDoc
+alignment rules.
+
 ## PHPUnit Preset
 
 Enforces modern PHPUnit testing standards and naming conventions.

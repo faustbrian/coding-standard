@@ -7,6 +7,9 @@
 
 Opinionated PHP-CS-Fixer configuration with custom fixers and presets for modern PHP projects. Enforces strict coding standards, naming conventions, and architectural patterns.
 
+PHPDoc presets also include an 80-column docblock prose wrapper so long
+descriptions stay readable without relying on manual formatting.
+
 ## Requirements
 
 > **Requires [PHP 8.4+](https://php.net/releases/)**

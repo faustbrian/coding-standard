@@ -21,6 +21,7 @@ use Cline\CodingStandard\PhpCsFixer\Fixer\ImportFqcnInStaticCallFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\InterfaceNameFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\NamespaceFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\NewArgumentNewlineFixer;
+use Cline\CodingStandard\PhpCsFixer\Fixer\PhpdocLineLengthFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\PsalmImmutableOnReadonlyClassFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\RedundantReadonlyPropertyFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\TraitNameFixer;
@@ -112,6 +113,7 @@ final class ConfigurationFactory
                 new FinalReadonlyClassFixer(),
                 new InterfaceNameFixer(),
                 new NamespaceFixer(),
+                new PhpdocLineLengthFixer(),
                 new RedundantReadonlyPropertyFixer(),
                 new TraitNameFixer(),
                 new VariableCaseFixer(),

@@ -9,4 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added repository-level maintainer guidance in `AGENTS.md`.
+- Added `Architecture/phpdoc_line_length_fixer` to wrap long PHPDoc prose
+  lines at 80 columns.
 - Initial release

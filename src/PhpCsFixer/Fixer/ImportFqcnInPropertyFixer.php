@@ -38,7 +38,8 @@ use function in_array;
 use function mb_strtolower;
 
 /**
- * Import FQCNs used in property (and parameter/promoted property) type declarations.
+ * Import FQCNs used in property (and parameter/promoted property) type
+ * declarations.
  *
  * @author Brian Faust <brian@cline.sh>
  * @version 1.0.1
@@ -186,7 +187,8 @@ final class ImportFqcnInPropertyFixer extends AbstractFixer
     }
 
     /**
-     * Collect name going right starting at $start (which is T_NS_SEPARATOR or T_STRING)
+     * Collect name going right starting at $start (which is T_NS_SEPARATOR or
+     * T_STRING)
      *
      * @param Tokens<Token> $tokens
      *
