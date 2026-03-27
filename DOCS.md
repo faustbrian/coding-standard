@@ -457,6 +457,30 @@ Enforces consistent `@version` tag format in PHPDoc blocks.
 
 **Rule Key:** `Architecture/version_tag_fixer`
 
+### RemoveVersionTagFixer
+
+Removes all `@version` tags from PHPDoc blocks and drops empty docblocks
+left behind by that removal.
+
+```php
+// ❌ Before
+/**
+ * Example summary.
+ *
+ * @author Brian Faust <brian@cline.sh>
+ * @version 1.0.0
+ */
+
+// ✅ After
+/**
+ * Example summary.
+ *
+ * @author Brian Faust <brian@cline.sh>
+ */
+```
+
+**Rule Key:** `Architecture/remove_version_tag_fixer`
+
 ### NamespaceFixer
 
 Enforces consistent namespace declarations.

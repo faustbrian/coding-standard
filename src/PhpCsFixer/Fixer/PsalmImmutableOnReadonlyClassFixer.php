@@ -30,9 +30,6 @@ use const T_WHITESPACE;
 use function str_contains;
 use function str_replace;
 
-/**
- * @version 1.0.0
- */
 final class PsalmImmutableOnReadonlyClassFixer extends AbstractFixer
 {
     #[Override()]

@@ -23,9 +23,6 @@ use const T_STRING;
 
 use function str_ends_with;
 
-/**
- * @version 1.0.0
- */
 final class ExceptionNameFixer extends AbstractFixer
 {
     private const string SUFFIX = 'Exception';

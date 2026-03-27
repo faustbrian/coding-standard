@@ -14,9 +14,6 @@ use PhpCsFixerCustomFixers\Fixer\PhpUnitAssertArgumentsOrderFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpUnitDedicatedAssertFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpUnitNoUselessReturnFixer;
 
-/**
- * @version 1.0.0
- */
 final class PHPUnit implements PresetInterface
 {
     #[Override()]

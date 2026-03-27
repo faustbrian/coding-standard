@@ -22,9 +22,6 @@ use const T_TRAIT;
 
 use function str_ends_with;
 
-/**
- * @version 1.0.0
- */
 final class TraitNameFixer extends AbstractFixer
 {
     private const string SUFFIX = 'Trait';

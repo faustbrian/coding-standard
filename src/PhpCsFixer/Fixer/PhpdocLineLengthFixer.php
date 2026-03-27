@@ -31,9 +31,6 @@ use function preg_match;
 use function preg_split;
 use function wordwrap;
 
-/**
- * @version 1.0.0
- */
 final class PhpdocLineLengthFixer extends AbstractFixer
 {
     private const int MAX_LINE_LENGTH = 80;

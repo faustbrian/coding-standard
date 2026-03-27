@@ -29,7 +29,6 @@ use PhpCsFixerCustomFixers\Fixer\StringableInterfaceFixer;
 use PhpCsFixerCustomFixers\Fixer\TypedClassConstantFixer;
 
 /**
- * @version 1.0.2
  * @psalm-immutable
  */
 final readonly class Standard implements PresetInterface
@@ -465,7 +464,7 @@ final readonly class Standard implements PresetInterface
             'Architecture/import_fqcn_in_static_call_fixer' => true,
             'Architecture/import_fqcn_in_property_fixer' => true,
             'Architecture/new_argument_newline_fixer' => true,
-            // 'Architecture/version_tag_fixer' => true,
+            'Architecture/remove_version_tag_fixer' => true,
             'Architecture/namespace_fixer' => true,
             'Architecture/duplicate_docblock_after_attributes_fixer' => true,
             'Architecture/redundant_readonly_property_fixer' => true,

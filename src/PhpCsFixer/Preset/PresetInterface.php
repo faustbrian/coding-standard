@@ -9,9 +9,6 @@
 
 namespace Cline\CodingStandard\PhpCsFixer\Preset;
 
-/**
- * @version 1.0.0
- */
 interface PresetInterface
 {
     /**

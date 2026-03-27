@@ -25,9 +25,6 @@ use const T_STRING;
 
 use function str_ends_with;
 
-/**
- * @version 1.0.0
- */
 final class AbstractNameFixer extends AbstractFixer
 {
     private const string SUFFIX = 'Abstract';

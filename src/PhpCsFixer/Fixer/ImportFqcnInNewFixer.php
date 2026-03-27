@@ -46,8 +46,6 @@ use function mb_strtolower;
  * This fixer focuses on `new` expressions and avoids changes when doing so
  * would create a name collision with an already imported different class of the
  * same short name.
- *
- * @version 1.0.0
  */
 final class ImportFqcnInNewFixer extends AbstractFixer
 {

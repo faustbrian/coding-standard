@@ -28,9 +28,6 @@ use const T_TRAIT;
 use function array_reverse;
 use function array_unique;
 
-/**
- * @version 1.0.0
- */
 final class DuplicateDocBlockAfterAttributesFixer extends AbstractFixer
 {
     #[Override()]

@@ -26,24 +26,24 @@ use function mb_trim;
 use function preg_match;
 use function preg_replace;
 
-final class RemoveAuthorTagFixer extends AbstractFixer
+final class RemoveVersionTagFixer extends AbstractFixer
 {
     #[Override()]
     public function getName(): string
     {
-        return 'Architecture/remove_author_tag_fixer';
+        return 'Architecture/remove_version_tag_fixer';
     }
 
     #[Override()]
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
-            'Remove all @author tags from PHPDoc blocks.',
+            'Remove all @version tags from PHPDoc blocks.',
             [
                 new CodeSample(
                     '<?php
 /**
- * @author Jane Doe <jane@example.com>
+ * @version 1.0.0
  */
 class Example
 {
@@ -60,7 +60,7 @@ class Example
     public function isCandidate(Tokens $tokens): bool
     {
         foreach ($tokens as $token) {
-            if ($token->isGivenKind(T_DOC_COMMENT) && preg_match('/@author\b/', $token->getContent()) === 1) {
+            if ($token->isGivenKind(T_DOC_COMMENT) && preg_match('/@version\b/', $token->getContent()) === 1) {
                 return true;
             }
         }
@@ -81,11 +81,11 @@ class Example
 
             $content = $token->getContent();
 
-            if (preg_match('/@author\b/', $content) !== 1) {
+            if (preg_match('/@version\b/', $content) !== 1) {
                 continue;
             }
 
-            $updatedContent = preg_replace('/^\h*\*\h*@author\b[^\n]*\n?/m', '', $content);
+            $updatedContent = preg_replace('/^\h*\*\h*@version\b[^\n]*\n?/m', '', $content);
 
             if ($updatedContent === null) {
                 continue;

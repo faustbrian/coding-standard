@@ -36,8 +36,6 @@ use function str_contains;
  * This fixer only acts when the first argument is a `new` expression and there
  * are no non-whitespace tokens between the parenthesis and `new`. Existing
  * correct formatting (already multiline) is left unchanged.
- *
- * @version 1.0.0
  */
 final class NewArgumentNewlineFixer extends AbstractFixer
 {

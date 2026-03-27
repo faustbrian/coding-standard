@@ -44,9 +44,6 @@ use Cline\Struct\Attributes\WithInferredValidation;
 use Cline\Struct\Attributes\WithoutInferredValidation;
 use Override;
 
-/**
- * @version 1.0.2
- */
 final class Ordered implements PresetInterface
 {
     #[Override()]

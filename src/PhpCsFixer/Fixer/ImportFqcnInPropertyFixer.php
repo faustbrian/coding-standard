@@ -40,8 +40,6 @@ use function mb_strtolower;
 /**
  * Import FQCNs used in property (and parameter/promoted property) type
  * declarations.
- *
- * @version 1.0.1
  */
 final class ImportFqcnInPropertyFixer extends AbstractFixer
 {

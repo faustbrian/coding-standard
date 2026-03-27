@@ -39,9 +39,6 @@ use function str_starts_with;
 use function throw_if;
 use function throw_unless;
 
-/**
- * @version 1.0.0
- */
 final class NamespaceFixer extends AbstractFixer
 {
     /** @var array<string, string> */

@@ -18,9 +18,6 @@ use PhpCsFixerCustomFixers\Fixer\PhpdocTypesCommaSpacesFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpdocTypesTrimFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpUnitRequiresConstraintFixer;
 
-/**
- * @version 1.0.0
- */
 final class PHPDoc implements PresetInterface
 {
     #[Override()]

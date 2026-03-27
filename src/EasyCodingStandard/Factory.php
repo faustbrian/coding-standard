@@ -22,6 +22,7 @@ use Cline\CodingStandard\PhpCsFixer\Fixer\PhpdocLineLengthFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\PsalmImmutableOnReadonlyClassFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\RedundantReadonlyPropertyFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\RemoveAuthorTagFixer;
+use Cline\CodingStandard\PhpCsFixer\Fixer\RemoveVersionTagFixer;
 use Cline\CodingStandard\PhpCsFixer\Preset\PresetInterface;
 use Cline\CodingStandard\PhpCsFixer\Preset\Standard;
 use Closure;
@@ -144,6 +145,7 @@ final class Factory
             new PsalmImmutableOnReadonlyClassFixer(),
             new RedundantReadonlyPropertyFixer(),
             new RemoveAuthorTagFixer(),
+            new RemoveVersionTagFixer(),
         ];
     }
 }

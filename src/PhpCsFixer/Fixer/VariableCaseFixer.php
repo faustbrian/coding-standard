@@ -27,8 +27,6 @@ use const T_STRING_VARNAME;
 use const T_VARIABLE;
 
 /**
- * @version 1.0.0
- *
  * @implements ConfigurableFixerInterface<array{case: string}, array{case: string}>
  */
 final class VariableCaseFixer extends AbstractFixer implements ConfigurableFixerInterface

@@ -46,9 +46,6 @@ use const T_XOR_EQUAL;
 use function array_merge;
 use function count;
 
-/**
- * @version 1.0.0
- */
 final class FinalReadonlyClassFixer extends AbstractFixer
 {
     /** @var array{skip_abstract: bool, skip_if_mutation_detected: bool} */

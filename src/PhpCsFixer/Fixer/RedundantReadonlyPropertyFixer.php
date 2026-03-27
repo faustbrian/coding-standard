@@ -29,9 +29,6 @@ use const T_PUBLIC;
 use const T_READONLY;
 use const T_WHITESPACE;
 
-/**
- * @version 1.0.0
- */
 final class RedundantReadonlyPropertyFixer extends AbstractFixer
 {
     #[Override()]

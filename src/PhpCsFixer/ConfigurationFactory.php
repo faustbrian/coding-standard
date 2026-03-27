@@ -25,6 +25,7 @@ use Cline\CodingStandard\PhpCsFixer\Fixer\PhpdocLineLengthFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\PsalmImmutableOnReadonlyClassFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\RedundantReadonlyPropertyFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\RemoveAuthorTagFixer;
+use Cline\CodingStandard\PhpCsFixer\Fixer\RemoveVersionTagFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\TraitNameFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\VariableCaseFixer;
 use Cline\CodingStandard\PhpCsFixer\Fixer\VersionTagFixer;
@@ -40,9 +41,6 @@ use const PHP_VERSION_ID;
 use function array_merge;
 use function sprintf;
 
-/**
- * @version 1.0.2
- */
 final class ConfigurationFactory
 {
     /** @var array<string> */
@@ -116,6 +114,7 @@ final class ConfigurationFactory
                 new PhpdocLineLengthFixer(),
                 new RedundantReadonlyPropertyFixer(),
                 new RemoveAuthorTagFixer(),
+                new RemoveVersionTagFixer(),
                 new TraitNameFixer(),
                 new VariableCaseFixer(),
                 new VersionTagFixer(),

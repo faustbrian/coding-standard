@@ -40,9 +40,6 @@ use function str_contains;
 use function str_replace;
 use function throw_if;
 
-/**
- * @version 1.0.0
- */
 final class AuthorTagFixer extends AbstractFixer
 {
     private readonly ?string $authorName;
