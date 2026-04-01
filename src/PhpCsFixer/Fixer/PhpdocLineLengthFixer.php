@@ -26,7 +26,7 @@ use function wordwrap;
 
 final class PhpdocLineLengthFixer extends AbstractFixer
 {
-    private const int MAX_LINE_LENGTH = 80;
+    private const int MAX_LINE_LENGTH = 120;
 
     #[Override()]
     public function getName(): string
@@ -38,7 +38,7 @@ final class PhpdocLineLengthFixer extends AbstractFixer
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
-            'Wrap long prose lines in PHPDoc blocks to 80 columns.',
+            'Wrap long prose lines in PHPDoc blocks to 120 columns.',
             [
                 new CodeSample(
                     <<<'PHP'

@@ -55,7 +55,7 @@ PHP;
             continue;
         }
 
-        expect(strlen($line))->toBeLessThanOrEqual(80);
+        expect(strlen($line))->toBeLessThanOrEqual(120);
     }
 });
 
