@@ -21,8 +21,8 @@ use function mb_substr;
 use function str_contains;
 
 /**
- * Ensure method/function calls to `dispatch(` place a `new` expression argument
- * on the next line for readability:
+ * Ensure method/function calls to `dispatch(` place a `new` expression
+ * argument on the next line for readability:
  *
  * $bus->dispatch(new Foo(...)); becomes $bus->dispatch(\n new Foo(... )\n);
  *

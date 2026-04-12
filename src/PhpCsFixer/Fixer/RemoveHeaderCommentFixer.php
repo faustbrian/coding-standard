@@ -17,8 +17,8 @@ use const T_OPEN_TAG;
 use const T_WHITESPACE;
 
 /**
- * Removes the leading file header comment after the opening tag or strict types
- * declaration.
+ * Removes the leading file header comment after the opening tag or
+ * strict types declaration.
  */
 final class RemoveHeaderCommentFixer extends AbstractFixer
 {

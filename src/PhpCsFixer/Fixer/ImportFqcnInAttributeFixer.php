@@ -30,8 +30,8 @@ use function implode;
 use function mb_strtolower;
 
 /**
- * Import FQCNs used in attributes: #[\Vendor\Attr] -> #[Attr] + use
- * Vendor\Attr;
+ * Import FQCNs used in attributes: #[\Vendor\Attr] ->
+ * #[Attr] + use Vendor\Attr;
  */
 final class ImportFqcnInAttributeFixer extends AbstractFixer
 {

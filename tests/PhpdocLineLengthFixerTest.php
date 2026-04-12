@@ -55,8 +55,85 @@ PHP;
             continue;
         }
 
-        expect(strlen($line))->toBeLessThanOrEqual(120);
+        expect(strlen($line))->toBeLessThanOrEqual(80);
     }
+});
+
+it('reflows prose paragraphs to an 80 character limit', function (): void {
+    $code = <<<'PHP'
+<?php
+/**
+ * This fixer focuses on `new` expressions and avoids changes when doing so would create a name collision with an already imported different class of the same short name.
+ */
+final class Example
+{
+}
+PHP;
+
+    $fixer = new PhpdocLineLengthFixer();
+
+    $tokens = Tokens::fromCode($code);
+    $fixer->fix(new SplFileInfo(__FILE__), $tokens);
+
+    $result = $tokens->generateCode();
+
+    expect($result)->toContain(' * This fixer focuses on `new` expressions and avoids changes when doing');
+    expect($result)->toContain(' * so would create a name collision with an already imported different');
+    expect($result)->toContain(' * class of the same short name.');
+
+    foreach (explode("\n", $result) as $line) {
+        if (str_starts_with($line, ' * ') && !str_contains($line, '@')) {
+            expect(strlen($line))->toBeLessThanOrEqual(80);
+        }
+    }
+});
+
+it('normalizes already broken prose without creating orphan lines', function (): void {
+    $code = <<<'PHP'
+<?php
+/**
+ * This fixer focuses on `new` expressions and avoids changes when doing so
+ * would
+ * create a name collision with an already imported different class of the same
+ * short name.
+ */
+final class Example
+{
+}
+PHP;
+
+    $fixer = new PhpdocLineLengthFixer();
+
+    $tokens = Tokens::fromCode($code);
+    $fixer->fix(new SplFileInfo(__FILE__), $tokens);
+
+    $result = $tokens->generateCode();
+
+    expect($result)->not->toContain("\n * would\n");
+    expect($result)->toContain(' * This fixer focuses on `new` expressions and avoids changes when doing');
+    expect($result)->toContain(' * so would create a name collision with an already imported different');
+});
+
+it('does not split words in prose lines', function (): void {
+    $code = <<<'PHP'
+<?php
+/**
+ * Hyperparameterization hyperparameterization hyperparameterization hyperparameterization.
+ */
+final class Example
+{
+}
+PHP;
+
+    $fixer = new PhpdocLineLengthFixer();
+
+    $tokens = Tokens::fromCode($code);
+    $fixer->fix(new SplFileInfo(__FILE__), $tokens);
+
+    $result = $tokens->generateCode();
+
+    expect($result)->not->toContain("hyperparameterizatio\n");
+    expect($result)->toContain('hyperparameterization');
 });
 
 it('does not reflow long annotation type declarations', function (): void {

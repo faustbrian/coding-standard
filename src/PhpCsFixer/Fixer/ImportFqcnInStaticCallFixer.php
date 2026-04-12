@@ -33,8 +33,8 @@ use function in_array;
 use function mb_strtolower;
 
 /**
- * Import FQCNs used in static calls: \Vendor\Pkg\Cls::method() -> Cls::method()
- * + use Vendor\Pkg\Cls;
+ * Import FQCNs used in static calls: \Vendor\Pkg\Cls::method() ->
+ * Cls::method() + use Vendor\Pkg\Cls;
  */
 final class ImportFqcnInStaticCallFixer extends AbstractFixer
 {

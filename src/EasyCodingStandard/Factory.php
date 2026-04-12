@@ -39,8 +39,8 @@ use function is_array;
 /**
  * Factory for creating EasyCodingStandard configurations.
  *
- * Provides a streamlined way to create ECS configurations using the centralized
- * PHP-CS-Fixer presets and custom fixers.
+ * Provides a streamlined way to create ECS configurations using the
+ * centralized PHP-CS-Fixer presets and custom fixers.
  */
 final class Factory
 {
