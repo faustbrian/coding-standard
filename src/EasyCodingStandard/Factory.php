@@ -47,11 +47,10 @@ final class Factory
     /**
      * Creates an ECS configuration closure.
      *
-     * @param array<string>                                                             $paths           Paths to check (e.g., [__DIR__.'/src', __DIR__.'/tests']).
-     * @param array<class-string<FixerInterface>|int<0, max>, null|list<string>|string> $skip            Rules to skip, keyed by rule class with array of paths.
-     * @param null|PresetInterface                                                      $preset          Custom preset to use (defaults to Standard).
-     * @param array<string, array<string, mixed>|bool>                                  $rules           Additional rules to merge with preset.
-     * @param null|CopyrightHeader                                                      $copyrightHeader Custom copyright header (only used when preset is null).
+     * @param array<string>                                                             $paths  Paths to check (e.g., [__DIR__.'/src', __DIR__.'/tests']).
+     * @param array<class-string<FixerInterface>|int<0, max>, null|list<string>|string> $skip   Rules to skip, keyed by rule class with array of paths.
+     * @param null|PresetInterface                                                      $preset Custom preset to use (defaults to Standard).
+     * @param array<string, array<string, mixed>|bool>                                  $rules  Additional rules to merge with preset.
      *
      * @return Closure(ECSConfig): void
      */
@@ -62,7 +61,12 @@ final class Factory
         array $rules = [],
         ?CopyrightHeader $copyrightHeader = null,
     ): Closure {
-        return static function (ECSConfig $ecsConfig) use ($paths, $skip, $preset, $rules, $copyrightHeader): void {
+        $resolvedRules = [
+            ...self::defaultRules($preset, $copyrightHeader),
+            ...$rules,
+        ];
+
+        return static function (ECSConfig $ecsConfig) use ($paths, $skip, $preset, $resolvedRules): void {
             $ecsConfig->paths($paths);
             $ecsConfig->parallel();
 
@@ -74,8 +78,8 @@ final class Factory
             }
 
             // Get rules from preset
-            $preset ??= $copyrightHeader instanceof CopyrightHeader ? new Standard($copyrightHeader) : new Standard();
-            $presetRules = [...$preset->rules(), ...$rules];
+            $preset ??= new Standard();
+            $presetRules = [...$preset->rules(), ...$resolvedRules];
 
             // Register built-in php-cs-fixer fixers
             $fixerFactory = new FixerFactory();
@@ -117,6 +121,28 @@ final class Factory
                 PhpdocSeparationFixer::class => null,
             ]);
         };
+    }
+
+    /**
+     * @return array<string, array<string, mixed>|bool>
+     */
+    private static function defaultRules(
+        ?PresetInterface $preset,
+        ?CopyrightHeader $copyrightHeader,
+    ): array {
+        if ($preset !== null || !$copyrightHeader instanceof CopyrightHeader) {
+            return [];
+        }
+
+        return [
+            'header_comment' => [
+                'comment_type' => 'PHPDoc',
+                'header' => $copyrightHeader->render(),
+                'location' => 'after_declare_strict',
+                'separate' => 'both',
+            ],
+            'Architecture/remove_header_comment_fixer' => false,
+        ];
     }
 
     /**

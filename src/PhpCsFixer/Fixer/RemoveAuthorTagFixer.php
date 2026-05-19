@@ -127,6 +127,6 @@ class Example
     {
         $content = preg_replace("/\n{3,}/", "\n\n", $content);
 
-        return $content ?? mb_trim($content);
+        return $content ?? mb_trim('');
     }
 }
