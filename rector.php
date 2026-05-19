@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 use Cline\CodingStandard\Rector\Factory;
+use Rector\Php85\Rector\Expression\NestedFuncCallsToPipeOperatorRector;
+use Rector\Php85\Rector\StmtsAwareInterface\SequentialAssignmentsToPipeOperatorRector;
 use Rector\TypeDeclaration\Rector\FunctionLike\AddParamTypeSplFixedArrayRector;
 use RectorLaravel\Rector\MethodCall\ContainerBindConcreteWithClosureOnlyRector;
 return Factory::create(
@@ -14,6 +16,9 @@ return Factory::create(
     skip: [
         // Conflicts with ECS phpdoc_align vertical alignment
         AddParamTypeSplFixedArrayRector::class,
-            ContainerBindConcreteWithClosureOnlyRector::class,
+        ContainerBindConcreteWithClosureOnlyRector::class,
     ],
-);
+)->withRules([
+    NestedFuncCallsToPipeOperatorRector::class,
+    SequentialAssignmentsToPipeOperatorRector::class,
+]);

@@ -169,7 +169,8 @@ class Example
     private function hasGitChanges(string $filePath): bool
     {
         // Check if file has uncommitted changes
-        $gitStatus = shell_exec(sprintf('git diff --name-only %s 2>/dev/null', escapeshellarg($filePath)));
+        $gitStatus = sprintf('git diff --name-only %s 2>/dev/null', escapeshellarg($filePath))
+            |> shell_exec(...);
         $gitStatusTrimmed = mb_trim($gitStatus !== false && $gitStatus !== null ? $gitStatus : '');
 
         if (!in_array($gitStatusTrimmed, ['', '0'], true)) {
@@ -177,7 +178,8 @@ class Example
         }
 
         // Check if file has staged changes
-        $gitStaged = shell_exec(sprintf('git diff --cached --name-only %s 2>/dev/null', escapeshellarg($filePath)));
+        $gitStaged = sprintf('git diff --cached --name-only %s 2>/dev/null', escapeshellarg($filePath))
+            |> shell_exec(...);
         $gitStagedTrimmed = mb_trim($gitStaged !== false && $gitStaged !== null ? $gitStaged : '');
 
         return !in_array($gitStagedTrimmed, ['', '0'], true);

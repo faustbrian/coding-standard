@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added repository-level maintainer guidance in `AGENTS.md`.
+- Added Rector's pipe operator migration rules for nested function
+  calls and sequential assignment chains.
 - Added `Architecture/phpdoc_line_length_fixer` to wrap long PHPDoc prose
   lines at 80 columns.
 - Added `Architecture/remove_author_tag_fixer` to strip `@author`

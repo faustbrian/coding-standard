@@ -66,6 +66,8 @@ vendor/bin/ecs check --fix
 ## Rector (Automated Refactoring)
 
 For automated code upgrades and refactoring, use the Rector factory.
+The bundled config includes the PHP 8.5 pipe-operator migrations for
+nested function calls and sequential assignment chains.
 
 ### Quick Setup
 
