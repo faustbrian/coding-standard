@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added `Cline\CodingStandard\EasyCodingStandard\Factory::configure()`
+  as the preferred fluent ECS config entrypoint while keeping
+  `Factory::create()` for backward compatibility.
 - Added repository-level maintainer guidance in `AGENTS.md`.
 - Added Rector's pipe operator migration rules for nested function
   calls and sequential assignment chains.

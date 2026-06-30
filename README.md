@@ -17,6 +17,9 @@ It also removes `@version` tags by default while still allowing explicit
 opt-in to the legacy version-tag fixer.
 It removes the file-level license header by default while still allowing
 explicit opt-in to the legacy `header_comment` rule.
+For EasyCodingStandard configs, prefer `Factory::configure(...)` in
+`ecs.php`; the older `Factory::create(...)` closure API remains
+available for compatibility.
 
 ## Requirements
 

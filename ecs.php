@@ -9,6 +9,4 @@
 
 use Cline\CodingStandard\EasyCodingStandard\Factory;
 
-return Factory::create(
-    paths: [__DIR__.'/src'],
-);
+return Factory::configure(paths: [__DIR__.'/src']);

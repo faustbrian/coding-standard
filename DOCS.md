@@ -24,9 +24,7 @@ Create an `ecs.php` in your project root:
 
 use Cline\CodingStandard\EasyCodingStandard\Factory;
 
-return Factory::create(
-    paths: [__DIR__.'/src', __DIR__.'/tests'],
-);
+return Factory::configure(paths: [__DIR__.'/src', __DIR__.'/tests']);
 ```
 
 That's it! The factory provides sensible defaults using the Standard preset.
@@ -39,7 +37,7 @@ That's it! The factory provides sensible defaults using the Standard preset.
 use Cline\CodingStandard\EasyCodingStandard\Factory;
 use Cline\CodingStandard\PhpCsFixer\Preset\Standard;
 
-return Factory::create(
+return Factory::configure(
     paths: [__DIR__.'/src', __DIR__.'/tests'],
     skip: [
         // Skip specific rules for specific paths
@@ -51,6 +49,19 @@ return Factory::create(
         'single_line_throw' => true,
     ],
 );
+```
+
+### Legacy Closure API
+
+If you still need the older closure-based ECS config shape, `Factory::create()`
+remains available for compatibility:
+
+```php
+<?php declare(strict_types=1);
+
+use Cline\CodingStandard\EasyCodingStandard\Factory;
+
+return Factory::create(paths: [__DIR__.'/src', __DIR__.'/tests']);
 ```
 
 ### Running ECS

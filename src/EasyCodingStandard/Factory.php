@@ -20,6 +20,7 @@ use Cline\CodingStandard\PhpCsFixer\Fixer\RemoveVersionTagFixer;
 use Cline\CodingStandard\PhpCsFixer\Preset\PresetInterface;
 use Cline\CodingStandard\PhpCsFixer\Preset\Standard;
 use Closure;
+use PHP_CodeSniffer\Sniffs\Sniff;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocAnnotationWithoutDotFixer;
@@ -33,6 +34,7 @@ use SlevomatCodingStandard\Sniffs\PHP\RequireNowdocSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\UselessConstantTypeHintSniff;
 use Symplify\CodingStandard\Fixer\Spacing\StandaloneLinePromotedPropertyFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
+use Symplify\EasyCodingStandard\Configuration\ECSConfigBuilder;
 
 use function is_array;
 
@@ -44,6 +46,51 @@ use function is_array;
  */
 final class Factory
 {
+    /**
+     * Creates a fluent ECS config builder for direct use in `ecs.php`.
+     *
+     * @param array<string>                                                             $paths  Paths to check (e.g., [__DIR__.'/src', __DIR__.'/tests']).
+     * @param array<class-string<FixerInterface>|int<0, max>, null|list<string>|string> $skip   Rules to skip, keyed by rule class with array of paths.
+     * @param null|PresetInterface                                                      $preset Custom preset to use (defaults to Standard).
+     * @param array<string, array<string, mixed>|bool>                                  $rules  Additional rules to merge with preset.
+     */
+    public static function configure(
+        array $paths,
+        array $skip = [],
+        ?PresetInterface $preset = null,
+        array $rules = [],
+        ?CopyrightHeader $copyrightHeader = null,
+    ): ECSConfigBuilder {
+        $resolvedRules = [
+            ...self::defaultRules($preset, $copyrightHeader),
+            ...$rules,
+        ];
+
+        ['skip' => $resolvedSkip, 'rules' => $ruleClasses, 'configuredRules' => $configuredRules] = self::resolveConfiguration(
+            $skip,
+            $preset,
+            $resolvedRules,
+        );
+
+        $ecsConfigBuilder = ECSConfig::configure()
+            ->withPaths($paths)
+            ->withParallel();
+
+        if ($resolvedSkip !== []) {
+            $ecsConfigBuilder->withSkip($resolvedSkip);
+        }
+
+        if ($ruleClasses !== []) {
+            $ecsConfigBuilder->withRules($ruleClasses);
+        }
+
+        foreach ($configuredRules as $checkerClass => $configuration) {
+            $ecsConfigBuilder->withConfiguredRule($checkerClass, $configuration);
+        }
+
+        return $ecsConfigBuilder;
+    }
+
     /**
      * Creates an ECS configuration closure.
      *
@@ -70,56 +117,23 @@ final class Factory
             $ecsConfig->paths($paths);
             $ecsConfig->parallel();
 
-            // PSR-12 set (uncomment to enable)
-            // $ecsConfig->sets([SetList::PSR_12]);
-
-            if ($skip !== []) {
-                $ecsConfig->skip($skip);
-            }
-
-            // Get rules from preset
-            $preset ??= new Standard();
-            $presetRules = [...$preset->rules(), ...$resolvedRules];
-
-            // Register built-in php-cs-fixer fixers
-            $fixerFactory = new FixerFactory();
-            $fixerFactory->registerBuiltInFixers();
-            $fixerFactory->registerCustomFixers(
-                new PhpCsFixerCustomFixers(),
+            ['skip' => $resolvedSkip, 'rules' => $ruleClasses, 'configuredRules' => $configuredRules] = self::resolveConfiguration(
+                $skip,
+                $preset,
+                $resolvedRules,
             );
-            $fixerFactory->registerCustomFixers(self::getCustomFixers());
 
-            $ruleSet = new RuleSet($presetRules);
-            $fixerFactory->useRuleSet($ruleSet);
-
-            foreach ($fixerFactory->getFixers() as $fixer) {
-                $fixerName = $fixer->getName();
-                $ruleConfig = $ruleSet->getRuleConfiguration($fixerName);
-
-                if ($fixer instanceof ConfigurableFixerInterface && is_array($ruleConfig)) {
-                    $ecsConfig->ruleWithConfiguration($fixer::class, $ruleConfig);
-                } else {
-                    $ecsConfig->rule($fixer::class);
-                }
+            if ($resolvedSkip !== []) {
+                $ecsConfig->skip($resolvedSkip);
             }
 
-            // Symplify coding standard fixers
-            $ecsConfig->rule(StandaloneLinePromotedPropertyFixer::class);
+            foreach ($ruleClasses as $checkerClass) {
+                $ecsConfig->rule($checkerClass);
+            }
 
-            // Slevomat coding standard sniffs (unique rules not in php-cs-fixer)
-            $ecsConfig->rule(DisallowDirectMagicInvokeCallSniff::class);
-            $ecsConfig->rule(EarlyExitSniff::class);
-            $ecsConfig->rule(RequireNowdocSniff::class);
-            $ecsConfig->rule(UselessConstantTypeHintSniff::class);
-
-            $ecsConfig->skip([
-                // TODO: Fix ImportFqcnInPropertyFixer array_key_exists bug
-                ImportFqcnInPropertyFixer::class => null,
-                // Conflicts with PhpdocOrderFixer (lowercases/removes dots)
-                PhpdocAnnotationWithoutDotFixer::class => null,
-                // Conflicts with PhpdocOrderFixer (different blank line rules between annotations)
-                PhpdocSeparationFixer::class => null,
-            ]);
+            foreach ($configuredRules as $checkerClass => $configuration) {
+                $ecsConfig->ruleWithConfiguration($checkerClass, $configuration);
+            }
         };
     }
 
@@ -130,7 +144,7 @@ final class Factory
         ?PresetInterface $preset,
         ?CopyrightHeader $copyrightHeader,
     ): array {
-        if ($preset !== null || !$copyrightHeader instanceof CopyrightHeader) {
+        if ($preset instanceof PresetInterface || !$copyrightHeader instanceof CopyrightHeader) {
             return [];
         }
 
@@ -142,6 +156,85 @@ final class Factory
                 'separate' => 'both',
             ],
             'Architecture/remove_header_comment_fixer' => false,
+        ];
+    }
+
+    /**
+     * @param array<class-string<FixerInterface>|int<0, max>, null|list<string>|string> $skip
+     * @param array<string, array<string, mixed>|bool>                                  $resolvedRules
+     *
+     * @return array{
+     *     skip: array<class-string<FixerInterface>|int<0, max>, null|list<string>|string>,
+     *     rules: list<class-string<FixerInterface|Sniff>>,
+     *     configuredRules: array<class-string<FixerInterface|Sniff>, array<string, mixed>>
+     * }
+     */
+    private static function resolveConfiguration(
+        array $skip,
+        ?PresetInterface $preset,
+        array $resolvedRules,
+    ): array {
+        $preset ??= new Standard();
+        $presetRules = [...$preset->rules(), ...$resolvedRules];
+
+        $fixerFactory = new FixerFactory();
+        $fixerFactory->registerBuiltInFixers();
+        $fixerFactory->registerCustomFixers(
+            new PhpCsFixerCustomFixers(),
+        );
+        $fixerFactory->registerCustomFixers(self::getCustomFixers());
+
+        $ruleSet = new RuleSet($presetRules);
+        $fixerFactory->useRuleSet($ruleSet);
+
+        /** @var list<class-string<FixerInterface|Sniff>> $ruleClasses */
+        $ruleClasses = [];
+
+        /** @var array<class-string<FixerInterface|Sniff>, array<string, mixed>> $configuredRules */
+        $configuredRules = [];
+
+        foreach ($fixerFactory->getFixers() as $fixer) {
+            $fixerName = $fixer->getName();
+            $ruleConfig = $ruleSet->getRuleConfiguration($fixerName);
+
+            if ($fixer instanceof ConfigurableFixerInterface && is_array($ruleConfig)) {
+                /** @var array<string, mixed> $ruleConfig */
+                $configuredRules[$fixer::class] = $ruleConfig;
+
+                continue;
+            }
+
+            $ruleClasses[] = $fixer::class;
+        }
+
+        $ruleClasses[] = StandaloneLinePromotedPropertyFixer::class;
+        $ruleClasses[] = DisallowDirectMagicInvokeCallSniff::class;
+        $ruleClasses[] = EarlyExitSniff::class;
+        $ruleClasses[] = RequireNowdocSniff::class;
+        $ruleClasses[] = UselessConstantTypeHintSniff::class;
+
+        return [
+            'skip' => [
+                ...$skip,
+                ...self::defaultSkip(),
+            ],
+            'rules' => $ruleClasses,
+            'configuredRules' => $configuredRules,
+        ];
+    }
+
+    /**
+     * @return array<class-string<FixerInterface>, null>
+     */
+    private static function defaultSkip(): array
+    {
+        return [
+            // TODO: Fix ImportFqcnInPropertyFixer array_key_exists bug
+            ImportFqcnInPropertyFixer::class => null,
+            // Conflicts with PhpdocOrderFixer (lowercases/removes dots)
+            PhpdocAnnotationWithoutDotFixer::class => null,
+            // Conflicts with PhpdocOrderFixer (different blank line rules between annotations)
+            PhpdocSeparationFixer::class => null,
         ];
     }
 

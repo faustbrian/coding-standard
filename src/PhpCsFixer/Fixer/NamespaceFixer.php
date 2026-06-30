@@ -152,7 +152,7 @@ namespace Wrong\Namespace;',
             return null;
         }
 
-        while ($dir !== '/' && $dir !== '') {
+        while ($dir !== '/') {
             $composerPath = $dir.'/composer.json';
 
             if (file_exists($composerPath)) {
