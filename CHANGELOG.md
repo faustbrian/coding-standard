@@ -27,6 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial release
 
 ### Changed
+- Switched the Standard preset to enable
+  `nullable_type_declaration_for_default_null_value` without the
+  deprecated `use_nullable_type_declaration` option so ECS remains
+  compatible with current PHP-CS-Fixer releases.
 - Switched the Standard preset to remove `@author` tags by default
   instead of adding them.
 - Switched the Standard preset to remove file header comments by

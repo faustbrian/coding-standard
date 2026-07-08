@@ -344,9 +344,7 @@ final readonly class Standard implements PresetInterface
             'not_operator_with_space' => false,
             'not_operator_with_successor_space' => false,
             'nullable_type_declaration' => true,
-            'nullable_type_declaration_for_default_null_value' => [
-                'use_nullable_type_declaration' => true,
-            ],
+            'nullable_type_declaration_for_default_null_value' => true,
             'object_operator_without_whitespace' => true,
             'octal_notation' => true,
             'operator_linebreak' => [

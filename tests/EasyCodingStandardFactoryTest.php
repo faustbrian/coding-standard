@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Cline\CodingStandard\EasyCodingStandard\Factory;
 use Cline\CodingStandard\PhpCsFixer\CopyrightHeader;
 use Cline\CodingStandard\PhpCsFixer\Fixer\ImportFqcnInPropertyFixer;
+use Cline\CodingStandard\PhpCsFixer\Preset\Standard;
 use PhpCsFixer\Fixer\ClassNotation\FinalClassFixer;
 use Symplify\EasyCodingStandard\Configuration\ECSConfigBuilder;
 
@@ -61,4 +62,10 @@ it('builds a fluent ecs config builder with the same defaults', function (): voi
     expect($reflection->getProperty('skip')->getValue($builder))->toHaveKey(FinalClassFixer::class);
     expect($reflection->getProperty('skip')->getValue($builder))->toHaveKey(ImportFqcnInPropertyFixer::class);
     expect($reflection->getProperty('rulesWithConfiguration')->getValue($builder))->not->toBeEmpty();
+});
+
+it('avoids deprecated nullable default rule configuration', function (): void {
+    $rules = (new Standard())->rules();
+
+    expect($rules['nullable_type_declaration_for_default_null_value'])->toBeTrue();
 });
