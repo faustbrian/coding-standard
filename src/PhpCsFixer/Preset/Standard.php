@@ -448,7 +448,7 @@ final readonly class Standard implements PresetInterface
             'Architecture/namespace_fixer' => true,
             'Architecture/duplicate_docblock_after_attributes_fixer' => true,
             'Architecture/redundant_readonly_property_fixer' => true,
-            'Architecture/psalm_immutable_on_readonly_class_fixer' => true,
+            'Architecture/psalm_immutable_on_readonly_class_fixer' => false,
             // 'Architecture/final_readonly_class_fixer' => true,
             DeclareAfterOpeningTagFixer::name() => true,
             EmptyFunctionBodyFixer::name() => true,

@@ -23,6 +23,10 @@ use const T_WHITESPACE;
 use function str_contains;
 use function str_replace;
 
+/**
+ * @deprecated Add `@psalm-immutable` intentionally when a class satisfies
+ *             Psalm's behavioral immutability contract.
+ */
 final class PsalmImmutableOnReadonlyClassFixer extends AbstractFixer
 {
     #[Override()]
@@ -35,7 +39,7 @@ final class PsalmImmutableOnReadonlyClassFixer extends AbstractFixer
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
-            'Adds @psalm-immutable to class docblocks for readonly classes when missing.',
+            'Adds @psalm-immutable to class docblocks for readonly classes when explicitly enabled.',
             [
                 new CodeSample(
                     '<?php

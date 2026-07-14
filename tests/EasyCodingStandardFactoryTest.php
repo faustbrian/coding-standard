@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Cline\CodingStandard\EasyCodingStandard\Factory;
 use Cline\CodingStandard\PhpCsFixer\CopyrightHeader;
 use Cline\CodingStandard\PhpCsFixer\Fixer\ImportFqcnInPropertyFixer;
+use Cline\CodingStandard\PhpCsFixer\Fixer\PsalmImmutableOnReadonlyClassFixer;
 use Cline\CodingStandard\PhpCsFixer\Preset\Standard;
 use PhpCsFixer\Fixer\ClassNotation\FinalClassFixer;
 use Symplify\EasyCodingStandard\Configuration\ECSConfigBuilder;
@@ -68,4 +69,22 @@ it('avoids deprecated nullable default rule configuration', function (): void {
     $rules = (new Standard())->rules();
 
     expect($rules['nullable_type_declaration_for_default_null_value'])->toBeTrue();
+});
+
+it('keeps semantic immutable annotations opt in', function (): void {
+    $defaultBuilder = Factory::configure(paths: [__DIR__]);
+    $optedInBuilder = Factory::configure(
+        paths: [__DIR__],
+        rules: [
+            'Architecture/psalm_immutable_on_readonly_class_fixer' => true,
+        ],
+    );
+
+    $defaultReflection = new ReflectionClass($defaultBuilder);
+    $optedInReflection = new ReflectionClass($optedInBuilder);
+
+    expect($defaultReflection->getProperty('rules')->getValue($defaultBuilder))
+        ->not->toContain(PsalmImmutableOnReadonlyClassFixer::class)
+        ->and($optedInReflection->getProperty('rules')->getValue($optedInBuilder))
+        ->toContain(PsalmImmutableOnReadonlyClassFixer::class);
 });

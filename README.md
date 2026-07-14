@@ -17,6 +17,10 @@ It also removes `@version` tags by default while still allowing explicit
 opt-in to the legacy version-tag fixer.
 It removes the file-level license header by default while still allowing
 explicit opt-in to the legacy `header_comment` rule.
+It does not infer `@psalm-immutable` from PHP's shallow `readonly`
+modifier. Add that semantic annotation intentionally, or explicitly opt
+in to the deprecated fixer when every targeted class satisfies Psalm's
+behavioral immutability contract.
 For EasyCodingStandard configs, prefer `Factory::configure(...)` in
 `ecs.php`; the older `Factory::create(...)` closure API remains
 available for compatibility.

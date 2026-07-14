@@ -27,6 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial release
 
 ### Changed
+- Disabled `Architecture/psalm_immutable_on_readonly_class_fixer` in the
+  Standard preset because PHP `readonly` does not prove Psalm's behavioral
+  or transitive immutability contract. Existing consumers can still enable
+  the fixer explicitly while migrating to intentional annotations.
 - Switched the Standard preset to enable
   `nullable_type_declaration_for_default_null_value` without the
   deprecated `use_nullable_type_declaration` option so ECS remains
@@ -37,3 +41,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   default instead of adding them.
 - Switched the Standard preset to remove `@version` tags by default
   instead of adding them.
+
+### Deprecated
+- Deprecated `PsalmImmutableOnReadonlyClassFixer`; it will be removed in a
+  future major release because semantic immutability cannot be inferred
+  safely by a token-based formatter.

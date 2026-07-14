@@ -393,7 +393,11 @@ public function show(string $id) {}
 
 ### PsalmImmutableOnReadonlyClassFixer
 
-Adds `@psalm-immutable` annotation to `readonly` classes.
+Adds `@psalm-immutable` annotations to `readonly` classes when explicitly
+enabled. This fixer is deprecated because PHP's `readonly` modifier only
+prevents property reassignment, while Psalm's annotation also promises
+behavioral and transitive immutability. Prefer adding the annotation
+intentionally to genuine immutable value objects.
 
 ```php
 // ❌ Before
@@ -407,6 +411,13 @@ readonly class User {}
 ```
 
 **Rule Key:** `Architecture/psalm_immutable_on_readonly_class_fixer`
+
+The Standard preset disables this fixer. Existing consumers that have
+verified every targeted readonly class can temporarily opt in:
+
+```php
+'Architecture/psalm_immutable_on_readonly_class_fixer' => true,
+```
 
 ## Documentation Fixers
 
@@ -582,6 +593,7 @@ Some fixers are disabled by default in the Standard preset:
 //     'separate' => 'both',
 // ],
 // 'Architecture/final_readonly_class_fixer' => true,
+// 'Architecture/psalm_immutable_on_readonly_class_fixer' => true,
 ```
 
 Enable them explicitly if needed:
