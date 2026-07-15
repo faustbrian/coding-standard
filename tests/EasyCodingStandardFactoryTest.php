@@ -9,6 +9,7 @@ use Cline\CodingStandard\PhpCsFixer\Fixer\PsalmImmutableOnReadonlyClassFixer;
 use Cline\CodingStandard\PhpCsFixer\Preset\Standard;
 use PhpCsFixer\Fixer\ClassNotation\FinalClassFixer;
 use PhpCsFixer\Fixer\FunctionNotation\MultilinePromotedPropertiesFixer;
+use Symplify\CodingStandard\Fixer\Spacing\StandaloneLinePromotedPropertyFixer;
 use Symplify\EasyCodingStandard\Configuration\ECSConfigBuilder;
 
 it('restores default header rules when a copyright header is provided', function (): void {
@@ -65,6 +66,8 @@ it('builds a fluent ecs config builder with the same defaults', function (): voi
     expect($reflection->getProperty('skip')->getValue($builder))->toHaveKey(ImportFqcnInPropertyFixer::class);
     expect($reflection->getProperty('rules')->getValue($builder))
         ->toContain(MultilinePromotedPropertiesFixer::class);
+    expect($reflection->getProperty('rules')->getValue($builder))
+        ->toContain(StandaloneLinePromotedPropertyFixer::class);
     expect($reflection->getProperty('rulesWithConfiguration')->getValue($builder))->not->toBeEmpty();
 });
 

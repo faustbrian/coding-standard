@@ -27,9 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial release
 
 ### Changed
-- Removed the abandoned `symplify/coding-standard` dependency and its
-  redundant promoted-property rule registration. The maintained PHP-CS-Fixer
-  `multiline_promoted_properties` rule remains enabled with the same scope.
+- Removed the abandoned `symplify/coding-standard` dependency. Its
+  `StandaloneLinePromotedPropertyFixer` remains explicitly enabled from ECS,
+  which now ships the rule directly.
 - Disabled `Architecture/psalm_immutable_on_readonly_class_fixer` in the
   Standard preset because PHP `readonly` does not prove Psalm's behavioral
   or transitive immutability contract. Existing consumers can still enable

@@ -32,6 +32,7 @@ use SlevomatCodingStandard\Sniffs\ControlStructures\EarlyExitSniff;
 use SlevomatCodingStandard\Sniffs\PHP\DisallowDirectMagicInvokeCallSniff;
 use SlevomatCodingStandard\Sniffs\PHP\RequireNowdocSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\UselessConstantTypeHintSniff;
+use Symplify\CodingStandard\Fixer\Spacing\StandaloneLinePromotedPropertyFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\Configuration\ECSConfigBuilder;
 
@@ -206,6 +207,7 @@ final class Factory
             $ruleClasses[] = $fixer::class;
         }
 
+        $ruleClasses[] = StandaloneLinePromotedPropertyFixer::class;
         $ruleClasses[] = DisallowDirectMagicInvokeCallSniff::class;
         $ruleClasses[] = EarlyExitSniff::class;
         $ruleClasses[] = RequireNowdocSniff::class;
